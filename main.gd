@@ -2,6 +2,7 @@ extends Node2D
 
 var peer: ENetMultiplayerPeer
 var player_scene = preload("res://player.tscn")
+@export var mob_scene: PackedScene
 
 
 func _ready() -> void:
@@ -21,6 +22,7 @@ func _on_host_button_pressed() -> void:
 	$CanvasLayer/DisconnectButton.show()
 	$CanvasLayer/HostButton.hide()
 	$CanvasLayer/JoinButton.hide()
+	_spawn_mobs()
 
 
 func _on_join_button_pressed() -> void:
@@ -39,9 +41,19 @@ func _on_disconnect_button_pressed() -> void:
 	for child in $PlayerList.get_children():
 		child.queue_free()
 	
+	for child in $MobList.get_children():
+		child.queue_free()
+	
 	$CanvasLayer/DisconnectButton.hide()
 	$CanvasLayer/HostButton.show()
 	$CanvasLayer/JoinButton.show()
+
+
+func _spawn_mobs():
+	for i in range(3):
+		var new_mob = mob_scene.instantiate()
+		new_mob.name = "Mob_" + str(i)
+		$MobList.add_child(new_mob)
 
 
 func _remove_player(id):

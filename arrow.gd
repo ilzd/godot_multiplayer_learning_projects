@@ -1,8 +1,9 @@
 extends Area2D
 
-const SPEED = 600.0
-var lifespan = 2.0
+const SPEED = 2000.0
+var lifespan = 1.0
 var shooter_id = 0
+var pierces_left = 1
 
 
 func _physics_process(delta: float) -> void:
@@ -20,4 +21,16 @@ func _on_body_entered(body: Node2D) -> void:
 			if multiplayer.get_unique_id() == shooter_id:
 				body.take_damage.rpc_id(body.name.to_int(), 10)
 			
-			queue_free()
+			_test_despawn()
+	elif body.is_in_group("mobs"):
+		if multiplayer.get_unique_id() == shooter_id:
+			var mob_authority = body.get_multiplayer_authority()
+			body.take_damage.rpc_id(mob_authority, 10)
+		_test_despawn()
+
+
+func _test_despawn():
+	if pierces_left == 0:
+		queue_free()
+		return
+	pierces_left -= 1

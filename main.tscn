@@ -1,15 +1,23 @@
 [gd_scene format=3 uid="uid://b6fk4v8milgxa"]
 
 [ext_resource type="Script" uid="uid://cvskxj5gy85xi" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://pnbgfngts4o8" path="res://mob.tscn" id="2_0xm2m"]
 
 [node name="Main" type="Node2D" unique_id=87335583]
 script = ExtResource("1_ig7tw")
+mob_scene = ExtResource("2_0xm2m")
 
 [node name="PlayerList" type="Node2D" parent="." unique_id=1150032947]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=107871672]
+[node name="MobList" type="Node2D" parent="." unique_id=1592614806]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=107871672]
 _spawnable_scenes = PackedStringArray("uid://duou2v7wsl4vj")
 spawn_path = NodePath("../PlayerList")
+
+[node name="MobSpawner" type="MultiplayerSpawner" parent="." unique_id=46771617]
+_spawnable_scenes = PackedStringArray("uid://pnbgfngts4o8")
+spawn_path = NodePath("../MobList")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1658392332]
 

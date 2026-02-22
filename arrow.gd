@@ -1,7 +1,7 @@
 extends Area2D
 
 const SPEED = 2000.0
-var lifespan = 1.0
+var lifespan = 2.0
 var shooter_id = 0
 var pierces_left = 1
 

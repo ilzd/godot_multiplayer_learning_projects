@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dtowafgie84gg"]
+
+[ext_resource type="Script" uid="uid://cm8e87uyghfpp" path="res://arrow.gd" id="1_l5ahi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kks1g"]
+size = Vector2(20, 4)
+
+[node name="Arrow" type="Area2D" unique_id=2143561853]
+script = ExtResource("1_l5ahi")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=857130740]
+offset_left = -10.0
+offset_top = -2.0
+offset_right = 10.0
+offset_bottom = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=807459690]
+shape = SubResource("RectangleShape2D_kks1g")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

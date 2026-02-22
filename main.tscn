@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b6fk4v8milgxa"]
+
+[ext_resource type="Script" uid="uid://cvskxj5gy85xi" path="res://main.gd" id="1_ig7tw"]
+
+[node name="Main" type="Node2D" unique_id=87335583]
+script = ExtResource("1_ig7tw")
+
+[node name="PlayerList" type="Node2D" parent="." unique_id=1150032947]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=107871672]
+_spawnable_scenes = PackedStringArray("uid://duou2v7wsl4vj")
+spawn_path = NodePath("../PlayerList")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1658392332]
+
+[node name="HostButton" type="Button" parent="CanvasLayer" unique_id=967476725]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 36.0
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer" unique_id=1622621007]
+offset_left = 56.0
+offset_top = 5.0
+offset_right = 94.0
+offset_bottom = 36.0
+text = "Join"
+
+[node name="DisconnectButton" type="Button" parent="CanvasLayer" unique_id=310748300]
+visible = false
+offset_left = 602.0
+offset_top = 5.0
+offset_right = 696.0
+offset_bottom = 36.0
+text = "Disconnect"
+
+[connection signal="pressed" from="CanvasLayer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/DisconnectButton" to="." method="_on_disconnect_button_pressed"]

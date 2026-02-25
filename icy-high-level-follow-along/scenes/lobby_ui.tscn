@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d3a2a602ex16g"]
+
+[ext_resource type="Script" uid="uid://bacq26f64g4yv" path="res://scripts/lobby_ui.gd" id="1_5rbtn"]
+
+[node name="LobbyUI" type="Control" unique_id=607763568]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5rbtn")
+
+[node name="HostButton" type="Button" parent="." unique_id=1012390074]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="." unique_id=792084988]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 38.0
+offset_right = 42.0
+offset_bottom = 69.0
+text = "Join"
+
+[connection signal="pressed" from="HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]

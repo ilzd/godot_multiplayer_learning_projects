@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const WALK_SPEED = 300.0
+const WALK_SPEED = 250.0
 const DASH_SPEED = 900.0
 const MAX_DASH_DISTANCE = 250.0
 
@@ -17,6 +17,8 @@ var distance_traveled := 0.0
 var last_valid_direction := Vector2.RIGHT
 
 var health: int = MAX_HEALTH
+var speed_modifier := 1.0
+var is_stunned := false
 
 @onready var health_bar: ProgressBar = $HealthBar
 
@@ -37,6 +39,14 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var input_dir := Vector2.ZERO
+	
+	if is_stunned:
+		velocity = Vector2.ZERO
+		if is_multiplayer_authority():
+			sync_position = global_position
+		return
+	
+	var current_walk_speed = WALK_SPEED * speed_modifier
 
 	if is_multiplayer_authority():
 		sync_position = global_position
@@ -56,11 +66,14 @@ func _physics_process(delta: float) -> void:
 			if last_valid_direction != Vector2.ZERO:
 				var arrow_dir = (get_global_mouse_position() - global_position).normalized()
 				shoot_arrow.rpc(arrow_dir, global_position, name.to_int())
+			
+		if Input.is_action_just_pressed("buff"):
+			apply_speed_buff.rpc_id(1)
 
 	match current_state:
 		State.WALK:
 			if is_multiplayer_authority():
-				velocity = input_dir * WALK_SPEED
+				velocity = input_dir * current_walk_speed
 				move_and_slide()
 			else:
 				global_position = global_position.lerp(sync_position, 20 * delta)
@@ -103,3 +116,18 @@ func shoot_arrow(dir: Vector2, pos: Vector2, owner_id: int) -> void:
 func apply_damage(amount: int) -> void:
 	health = max(health - amount, 0)
 	health_bar.value = health
+
+
+@rpc("any_peer", "call_local", "reliable")
+func apply_speed_buff():
+	if not multiplayer.is_server():
+		return
+	
+	var receiver = $StatusReceiver
+	if receiver.has_node("SpeedBuff"):
+		return
+#	
+	var buff = preload("res://speed_buff.tscn").instantiate()
+	buff.name = "SpeedBuff"
+	buff.duration = 4.0
+	receiver.add_child(buff, true)

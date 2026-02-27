@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://b5ndybrfhfu8x"]
+
+[ext_resource type="Script" uid="uid://bxb6agmrtog5s" path="res://mob.gd" id="1_dy6sc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfba5"]
+size = Vector2(40, 40)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dy6sc"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Mob" type="CharacterBody2D" unique_id=714218458 groups=["mobs"]]
+script = ExtResource("1_dy6sc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=961325634]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=88517724]
+shape = SubResource("RectangleShape2D_jfba5")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1728942527]
+replication_config = SubResource("SceneReplicationConfig_dy6sc")

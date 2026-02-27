@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cmdjcpajad1a0"]
+
+[ext_resource type="Script" uid="uid://bqhb5kgh8ebaj" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+
+[node name="MainMenu" type="Control" unique_id=1539215653]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+
+[node name="HostButton" type="Button" parent="." unique_id=238638523]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 197.0
+offset_right = 118.0
+offset_bottom = 228.0
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="." unique_id=909554264]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 241.0
+offset_right = 115.0
+offset_bottom = 272.0
+text = "Join"
+
+[node name="StartButton" type="Button" parent="." unique_id=1962894258]
+visible = false
+layout_mode = 0
+offset_left = 74.0
+offset_top = 281.0
+offset_right = 120.0
+offset_bottom = 312.0
+text = "Start"
+
+[node name="PlayerList" type="ItemList" parent="." unique_id=260941685]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 115.0
+offset_right = 424.0
+offset_bottom = 386.0
+auto_width = true
+auto_height = true
+
+[node name="PlayerName" type="LineEdit" parent="." unique_id=368034853]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 144.0
+offset_right = 173.0
+offset_bottom = 177.0
+text = "Player"
+
+[connection signal="pressed" from="HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

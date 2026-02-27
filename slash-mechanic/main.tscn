@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://frm1g4482owf"]
+
+[ext_resource type="Script" uid="uid://4xaipmr468kn" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://l1myxnfb6p71" path="res://player.tscn" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://b5ndybrfhfu8x" path="res://mob.tscn" id="2_h2yge"]
+
+[node name="Main" type="Node2D" unique_id=484443980]
+script = ExtResource("1_0xm2m")
+player_scene = ExtResource("2_1bvp3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=566423864]
+
+[node name="JoinButton" type="Button" parent="CanvasLayer" unique_id=356496483]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Join
+"
+
+[node name="HostButton" type="Button" parent="CanvasLayer" unique_id=1986727737]
+offset_left = 43.0
+offset_right = 87.0
+offset_bottom = 31.0
+text = "Host"
+
+[node name="Players" type="Node2D" parent="." unique_id=1194771724]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1957441948]
+spawn_path = NodePath("../Players")
+
+[node name="Mob" parent="." unique_id=714218458 instance=ExtResource("2_h2yge")]
+position = Vector2(226, 272)
+
+[node name="Mob2" parent="." unique_id=1713237616 instance=ExtResource("2_h2yge")]
+position = Vector2(355, 293)
+
+[node name="Mob3" parent="." unique_id=618658958 instance=ExtResource("2_h2yge")]
+position = Vector2(237, 365)
+
+[node name="Mob4" parent="." unique_id=879814936 instance=ExtResource("2_h2yge")]
+position = Vector2(443, 350)
+
+[node name="Mob5" parent="." unique_id=1741162280 instance=ExtResource("2_h2yge")]
+position = Vector2(235, 458)
+
+[node name="Mob6" parent="." unique_id=603385259 instance=ExtResource("2_h2yge")]
+position = Vector2(124, 301)
+
+[node name="Mob7" parent="." unique_id=1125773752 instance=ExtResource("2_h2yge")]
+position = Vector2(134, 436)
+
+[node name="Mob8" parent="." unique_id=791142420 instance=ExtResource("2_h2yge")]
+position = Vector2(330, 203)
+
+[node name="Mob9" parent="." unique_id=345543546 instance=ExtResource("2_h2yge")]
+position = Vector2(304, 407)
+
+[connection signal="pressed" from="CanvasLayer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HostButton" to="." method="_on_host_button_pressed"]
